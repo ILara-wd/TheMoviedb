@@ -1,8 +1,8 @@
 package com.shopperpos.movie.service.data.movieGenre
 
-import com.shopperpos.movie.main.MainActivity
+import com.shopperpos.movie.model.MovieMode
 
-class MovieGenreOutput : MainActivity.GaiaModel() {
+class MovieGenreOutput : MovieMode() {
 
     var page: Int? = null
     var with_genres: Int? = null

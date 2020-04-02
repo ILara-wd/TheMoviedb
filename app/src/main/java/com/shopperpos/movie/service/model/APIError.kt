@@ -1,8 +1,8 @@
 package com.shopperpos.movie.service.model
 
-import com.shopperpos.movie.main.MainActivity
+import com.shopperpos.movie.model.MovieMode
 
-class APIError() : MainActivity.GaiaModel() {
+class APIError() : MovieMode() {
 
     var status_code: Int? = null
     var status_message: String? = null

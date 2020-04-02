@@ -1,8 +1,8 @@
 package com.shopperpos.movie.service.data
 
-import com.shopperpos.movie.main.MainActivity
+import com.shopperpos.movie.model.MovieMode
 
-class SessionOutput : MainActivity.GaiaModel() {
+class SessionOutput : MovieMode() {
 
     var success: Boolean? = null
     var guest_session_id: String? = null

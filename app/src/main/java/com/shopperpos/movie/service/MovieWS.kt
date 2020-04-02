@@ -1,9 +1,12 @@
+@file:Suppress("BlockingMethodInNonBlockingContext")
+
 package com.shopperpos.movie.service
 
 import com.google.gson.Gson
-import com.shopperpos.movie.service.data.movieGenre.MovieGenreOutput
 import com.shopperpos.movie.service.data.SessionOutput
+import com.shopperpos.movie.service.data.movieDetail.MovieDetail
 import com.shopperpos.movie.service.data.movieGenre.MovieGenreInput
+import com.shopperpos.movie.service.data.movieGenre.MovieGenreOutput
 import com.shopperpos.movie.service.model.APIError
 import com.shopperpos.movie.service.model.Session
 import kotlinx.coroutines.Dispatchers
@@ -71,5 +74,36 @@ object MovieWS {
 
     }
 
+    fun getMovieDetail(movieId: Int, handler: (error: APIError?, response: MovieDetail?) -> Unit) {
+        val movieApi = ApiFactory.movieApi
+
+        GlobalScope.launch(Dispatchers.Main) {
+            try {
+
+                val request = movieApi.getMovieInfoDetailAsync(movieId)
+                val response = request.await()
+
+                if (!response.isSuccessful) {
+                    val error =
+                        Gson().fromJson(response.errorBody()?.string(), APIError::class.java)
+                    handler(error, null)
+                    return@launch
+                }
+
+                val body: MovieDetail? = response.body()
+
+                if (body == null) {
+                    handler(APIError(678, "no movie available", false), null)
+                    return@launch
+                }
+
+                handler(null, body)
+
+            } catch (e: java.lang.Exception) {
+                handler(APIError(e.hashCode(), e.localizedMessage, false), null)
+            }
+        }
+
+    }
 
 }

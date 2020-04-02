@@ -25,5 +25,16 @@ object WebServicesCompendium {
 
     }
 
+    fun getInfoMovie(movieId: Int) {
+        MovieWS.getMovieDetail(movieId) { error, response ->
+            if (error != null) {
+                print(error)
+            }
+            if (response != null) {
+                print(response)
+            }
+        }
+    }
+
 
 }

@@ -1,22 +1,24 @@
 package com.shopperpos.movie.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
-import com.google.gson.Gson
 import com.shopperpos.movie.R
 import com.shopperpos.movie.dialogs.MovieDialog
+import com.shopperpos.movie.dialogs.SetOnDetailListener
+import com.shopperpos.movie.movieDetail.MovieDetailActivity
 import com.shopperpos.movie.service.data.movieGenre.Movie
 import com.shopperpos.movie.tools.ScreenState
 import kotlinx.android.synthetic.main.activity_main.*
-import java.io.Serializable
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), SetOnDetailListener {
 
     private lateinit var viewModel: MainViewModel
+    private lateinit var mDialogFragment: MovieDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,13 +50,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showDialogInfo(movie: Movie){
-        val mDialogFragment = MovieDialog(movie)
+        mDialogFragment = MovieDialog(movie, this)
         mDialogFragment.show(supportFragmentManager, "movie")
-
-        //mDialogFragment.showLoading()// Inicia el button loader
-
-        //mDialogFragment.showButtonText(false)// Termina el button loader
-        /*mDialogFragment.dismiss()// Termina el dialog*/
     }
 
     private fun showProgress() {
@@ -76,16 +73,11 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
 
-    open class GaiaModel : Serializable {
-
-        override fun toString(): String {
-            return Gson().toJson(this)
-        }
-
-        fun <T : GaiaModel> toEntity(entityClass: Class<T>): T {
-            val gson = Gson()
-            return Gson().fromJson(gson.toJson(this), entityClass)
-        }
+    override fun onClickDetailMovie(movie: Movie) {
+        mDialogFragment.dismiss()
+        val intent = Intent(this@MainActivity, MovieDetailActivity::class.java)
+        intent.putExtra("movie", movie)
+        startActivity(intent)
     }
 
 }

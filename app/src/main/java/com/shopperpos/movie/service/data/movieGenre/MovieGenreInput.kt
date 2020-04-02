@@ -1,5 +1,7 @@
 package com.shopperpos.movie.service.data.movieGenre
 
+import com.shopperpos.movie.model.MovieMode
+
 class MovieGenreInput {
     val page: Int? = null
     val total_results: Int? = null
@@ -7,7 +9,7 @@ class MovieGenreInput {
     val results: List<Movie>? = null
 }
 
-class Movie {
+class Movie : MovieMode() {
     val popularity: Double? = null
     val vote_count: Int? = null
     val video: Boolean? = null
@@ -17,7 +19,7 @@ class Movie {
     val backdrop_path: String? = null
     val original_language: String? = null
     val original_title: String? = null
-    val genre_ids: List<Integer>? = null
+    val genre_ids: List<Int>? = null
     val title: String? = null
     val vote_average: Double? = null
     val overview: String? = null

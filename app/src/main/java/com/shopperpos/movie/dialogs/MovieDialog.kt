@@ -5,6 +5,7 @@ import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.DialogFragment
@@ -13,7 +14,10 @@ import com.shopperpos.movie.service.MovieConstants
 import com.shopperpos.movie.service.data.movieGenre.Movie
 import com.shopperpos.movie.tools.MovieTools
 
-class MovieDialog(private val movie: Movie) : DialogFragment() {
+class MovieDialog(
+    private val movie: Movie,
+    private val mImplSetOnDetailListener: SetOnDetailListener
+) : DialogFragment() {
 
     private lateinit var tvRating: TextView
     private lateinit var tvDialogTitle: TextView
@@ -36,6 +40,9 @@ class MovieDialog(private val movie: Movie) : DialogFragment() {
         tvDialogReleaseDate = view.findViewById(R.id.tv_dialog_release_date)
         tvDialogOverride = view.findViewById(R.id.tv_dialog_override)
         ivPosterDialog = view.findViewById(R.id.iv_poster_dialog)
+        view.findViewById<Button>(R.id.btn_dialog).setOnClickListener {
+            mImplSetOnDetailListener.onClickDetailMovie(movie)
+        }
         showMovieData()
     }
 
@@ -55,4 +62,8 @@ class MovieDialog(private val movie: Movie) : DialogFragment() {
 
     }
 
+}
+
+interface SetOnDetailListener {
+    fun onClickDetailMovie(movie: Movie)
 }
