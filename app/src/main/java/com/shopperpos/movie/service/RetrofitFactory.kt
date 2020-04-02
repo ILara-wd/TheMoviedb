@@ -1,18 +1,13 @@
-package mx.com.gaiadesign.gaia.gaia_service.gaia_retrofit
+package com.shopperpos.movie.service
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import com.shopperpos.movie.BuildConfig
 import com.squareup.moshi.Moshi
-import mx.com.gaiadesign.gaia.BuildConfig
-import mx.com.gaiadesign.gaia.gaia_service.gaia_data.tracking_order.ExtraInfoStringAdapter
-
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import org.simpleframework.xml.convert.AnnotationStrategy
-import org.simpleframework.xml.core.Persister
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import retrofit2.converter.simplexml.SimpleXmlConverterFactory
 import java.util.concurrent.TimeUnit
 
 object RetrofitFactory {
@@ -61,23 +56,8 @@ object RetrofitFactory {
         .baseUrl(baseUrl)
         .addConverterFactory(MoshiConverterFactory.create(
             Moshi.Builder()
-                .add(ExtraInfoStringAdapter())
+                /*.add(ExtraInfoStringAdapter())*/
                 .build()))
-        .addCallAdapterFactory(CoroutineCallAdapterFactory())
-        .build()
-
-    private val ClientXML =
-        OkHttpClient().newBuilder()
-            .connectTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
-            .readTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
-            .writeTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
-            .addInterceptor(loggingInterceptor)
-            .build()
-
-    fun retrofitXML(baseUrl: String): Retrofit = Retrofit.Builder()
-        .client(ClientXML)
-        .baseUrl(baseUrl)
-        .addConverterFactory(SimpleXmlConverterFactory.createNonStrict(Persister(AnnotationStrategy())))
         .addCallAdapterFactory(CoroutineCallAdapterFactory())
         .build()
 

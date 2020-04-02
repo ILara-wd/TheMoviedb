@@ -12,4 +12,10 @@ class Session {
         this.expires_at = ""
     }
 
+    constructor(guest_session_id: String?, expires_at: String?, success: Boolean?) {
+        this.success = success
+        this.guest_session_id = guest_session_id
+        this.expires_at = expires_at
+    }
+
 }

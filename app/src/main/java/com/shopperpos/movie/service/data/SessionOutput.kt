@@ -1,9 +1,20 @@
 package com.shopperpos.movie.service.data
 
-import com.shopperpos.movie.service.model.APIError
-import com.shopperpos.movie.service.model.Session
+import com.shopperpos.movie.main.MainActivity
 
-class SessionOutput {
-    var session: Session? = null
-    var error: APIError? = null
+class SessionOutput : MainActivity.GaiaModel() {
+
+    var success: Boolean? = null
+    var guest_session_id: String? = null
+    var expires_at: String? = null
+    var status_code: Int? = null
+    var status_message: String? = null
+
+    init {
+        this.status_message = ""
+        this.guest_session_id = ""
+        this.expires_at = ""
+        this.success = false
+        this.status_code = 0
+    }
 }
