@@ -5,9 +5,10 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.GridLayoutManager
 import com.google.gson.Gson
 import com.shopperpos.movie.R
-import com.shopperpos.movie.service.WebServicesCompendium
+import com.shopperpos.movie.dialogs.MovieDialog
 import com.shopperpos.movie.service.data.movieGenre.Movie
 import com.shopperpos.movie.tools.ScreenState
 import kotlinx.android.synthetic.main.activity_main.*
@@ -42,7 +43,18 @@ class MainActivity : AppCompatActivity() {
         when (renderState) {
             is MainState.ShowItems -> setItems(renderState.items)
             is MainState.ShowMessage -> showMessage(renderState.message)
+            is MainState.ShowDialogInfo -> showDialogInfo(renderState.movie)
         }
+    }
+
+    private fun showDialogInfo(movie: Movie){
+        val mDialogFragment = MovieDialog(movie)
+        mDialogFragment.show(supportFragmentManager, "movie")
+
+        //mDialogFragment.showLoading()// Inicia el button loader
+
+        //mDialogFragment.showButtonText(false)// Termina el button loader
+        /*mDialogFragment.dismiss()// Termina el dialog*/
     }
 
     private fun showProgress() {
@@ -56,7 +68,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setItems(items: List<Movie>) {
-        list.adapter = MainAdapter(items, viewModel::onItemClicked)
+        list.layoutManager = GridLayoutManager(this, 4)
+        list.adapter = MainAdapter(this, items, viewModel::onItemClicked)
     }
 
     private fun showMessage(message: String) {
@@ -73,9 +86,6 @@ class MainActivity : AppCompatActivity() {
             val gson = Gson()
             return Gson().fromJson(gson.toJson(this), entityClass)
         }
-
-        /*fun <T : GaiaModel> T?.orEmpty(): T = this ?: EmptyObject() as T*/
-
     }
 
 }

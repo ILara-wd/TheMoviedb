@@ -22,8 +22,8 @@ class MainViewModel(private val findIMoviesInteract: FindMoviesInteract) : ViewM
             return _mainState
         }
 
-    fun onItemClicked(item: String) {
-        _mainState.value = ScreenState.Render(MainState.ShowMessage(item))
+    fun onItemClicked(movie: Movie) {
+        _mainState.value = ScreenState.Render(MainState.ShowDialogInfo(movie))
     }
 
     override fun getResponseData(data: List<Movie>?) {
@@ -36,6 +36,7 @@ class MainViewModel(private val findIMoviesInteract: FindMoviesInteract) : ViewM
 
 }
 
+@Suppress("UNCHECKED_CAST")
 class MainViewModelFactory(private val findIMoviesInteract: FindMoviesInteract) :
     ViewModelProvider.NewInstanceFactory() {
 

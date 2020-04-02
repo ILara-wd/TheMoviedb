@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Movie</string>
+    <string name="text_btn_view_more">Ver Mas</string>
+
+    <string name="text_rating">Rating: %s</string>
+    <string name="text_overview">Overview: %s</string>
+    <string name="text_">Overview:\n %s</string>
+
 </resources>
