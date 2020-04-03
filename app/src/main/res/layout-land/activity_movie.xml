@@ -14,6 +14,7 @@
         android:contentDescription="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/tv_movie_title"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/movie_placeholder" />
@@ -53,7 +54,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_movie_productions_companies"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="130dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
@@ -79,7 +80,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_movie_vote_average"
         app:trimCollapsedText="@string/text_tv_read_less"
         app:trimExpandedText="@string/text_tv_read_more"
-        app:trimLength="10" />
+        app:trimLength="5" />
 
     <TextView
         android:id="@+id/tv_movie_language"

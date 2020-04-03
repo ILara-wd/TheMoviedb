@@ -1,10 +1,12 @@
 package com.shopperpos.movie.movie
 
+import android.graphics.Point
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.shopperpos.movie.R
 import com.shopperpos.movie.service.MovieConstants
 import com.shopperpos.movie.service.data.movieDetail.MovieDetail
@@ -61,14 +63,27 @@ class MovieActivity : AppCompatActivity() {
             iv_movie_poster,
             this@MovieActivity
         )
+        //iv_movie_poster.layoutParams.height = getSize()
+        iv_movie_poster.layoutParams.width = getSize() / 2
+
         tv_movie_title.text = movieDetail.title
-        //tv_movie_productions_companies.text = ""
-        //rv_movie_productions_companies.text = ""
+
+        rv_movie_productions_companies.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        rv_movie_productions_companies.adapter =
+            CompanyAdapter(this, movieDetail.production_companies.orEmpty())
+
         tv_movie_override.text = getString(R.string.text_overview, movieDetail.overview)
         tv_movie_language.text =
             getString(R.string.text_tv_original_language, movieDetail.original_language)
-        tv_movie_budget.text = getString(R.string.text_tv_budget, movieDetail.budget.toString())
-        tv_movie_revenue.text = getString(R.string.text_tv_revenue, movieDetail.revenue.toString())
+        tv_movie_budget.text = getString(
+            R.string.text_tv_budget,
+            MovieTools().numberFormatCash(movieDetail.budget.toString().toDouble())
+        )
+        tv_movie_revenue.text = getString(
+            R.string.text_tv_revenue,
+            MovieTools().numberFormatCash(movieDetail.revenue.toString().toDouble())
+        )
         tv_movie_release_date.text =
             getString(R.string.text_tv_release_date, movieDetail.release_date.toString())
         tv_movie_runtime.text = getString(R.string.text_tv_runtime, movieDetail.runtime.toString())
@@ -86,6 +101,15 @@ class MovieActivity : AppCompatActivity() {
     private fun showMessage(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
         finish()
+    }
+
+    private fun getSize(): Int {
+        val display = this.windowManager.defaultDisplay
+        val size = Point()
+        display.getSize(size)
+        val widthScreen = size.y
+        val onePortion = widthScreen / 3
+        return onePortion * 4
     }
 
 }

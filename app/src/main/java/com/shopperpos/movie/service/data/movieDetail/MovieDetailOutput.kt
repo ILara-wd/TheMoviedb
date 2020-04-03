@@ -22,7 +22,7 @@ class MovieDetail {
     val overview: String? = null
     val popularity: Double? = null
     val posterPath: String? = null
-    val productionCompanies: List<ProductionCompany>? = null
+    val production_companies: List<ProductionCompany>? = null
     val releaseDate: String? = null
     val revenue: Int? = null
     val runtime: Int? = null
@@ -41,9 +41,9 @@ class Genre {
 
 class ProductionCompany {
     var id: Int? = null
-    var logoPath: String? = null
+    var logo_path: String? = null
     var name: String? = null
-    var originCountry: String? = null
+    var origin_country: String? = null
 }
 
 class BelongsToCollection {
