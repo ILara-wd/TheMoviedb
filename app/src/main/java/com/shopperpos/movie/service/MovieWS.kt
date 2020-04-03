@@ -1,5 +1,4 @@
 @file:Suppress("BlockingMethodInNonBlockingContext")
-
 package com.shopperpos.movie.service
 
 import com.google.gson.Gson

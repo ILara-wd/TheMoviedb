@@ -3,7 +3,17 @@
     <string name="text_btn_view_more">Ver Mas</string>
 
     <string name="text_rating">Rating: %s</string>
-    <string name="text_overview">Overview: %s</string>
+    <string name="text_overview">Overview:\n %s</string>
     <string name="text_">Overview:\n %s</string>
+    <string name="text_tv_generic">( Generic Text )</string>
+    <string name="text_tv_production_companies">Compañias Productoras</string>
+    <string name="text_tv_original_language">Lenguage Original: %s</string>
+    <string name="text_tv_budget">Presupuesto: %s</string>
+    <string name="text_tv_revenue">Ingresos: %s</string>
+    <string name="text_tv_release_date">Fecha de Lanzamiento: %s</string>
+    <string name="text_tv_runtime">Duración: %s</string>
+    <string name="text_tv_vote_count">Recuento de votos: %s</string>
+    <string name="text_tv_read_less">Leer Menos</string>
+    <string name="text_tv_read_more">Leer mas</string>
 
 </resources>

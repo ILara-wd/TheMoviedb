@@ -51,6 +51,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
     implementation "android.arch.lifecycle:extensions:$lifecycle_version"
+    //noinspection LifecycleAnnotationProcessorWithJava8
     kapt "android.arch.lifecycle:compiler:$lifecycle_version"
 
     //noinspection GradleCompatible
@@ -69,10 +70,8 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinCoroutineVersion"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinCoroutineVersion"
 
-    //Klaxon
-    implementation 'com.beust:klaxon:5.0.1'
-
     implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'com.borjabravo:readmoretextview:2.1.0'
 
     implementation 'com.github.bumptech.glide:glide:4.8.0'
     kapt 'com.github.bumptech.glide:compiler:4.4.0'

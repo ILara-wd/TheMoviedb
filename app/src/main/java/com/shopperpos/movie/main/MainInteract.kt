@@ -3,9 +3,9 @@ package com.shopperpos.movie.main
 import com.shopperpos.movie.service.MovieWS
 import com.shopperpos.movie.service.data.movieGenre.MovieGenreOutput
 
-class FindMoviesInteract {
+class MainInteract {
 
-    fun getMovies(mImplMovieInteract: ImplMovieInteract) {
+    fun getMovies(mImplMainInteract: ImplMainInteract) {
 
         val data = MovieGenreOutput()
         data.page = 1
@@ -13,11 +13,10 @@ class FindMoviesInteract {
 
         MovieWS.getMovies(data) { error, response ->
             if (error != null){
-                mImplMovieInteract.trowError(error)
-                return@getMovies
+                mImplMainInteract.trowError(error)
             }
             if (response != null){
-                mImplMovieInteract.getResponseData(response.results)
+                mImplMainInteract.getResponseData(response.results)
             }
         }
 

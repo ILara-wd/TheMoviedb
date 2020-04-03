@@ -8,7 +8,7 @@ import com.shopperpos.movie.service.data.movieGenre.Movie
 import com.shopperpos.movie.service.model.APIError
 import com.shopperpos.movie.tools.ScreenState
 
-class MainViewModel(private val findIMoviesInteract: FindMoviesInteract) : ViewModel(), ImplMovieInteract {
+class MainViewModel(private val mainInteract: MainInteract) : ViewModel(), ImplMainInteract {
 
     private lateinit var _mainState: MutableLiveData<ScreenState<MainState>>
 
@@ -17,7 +17,7 @@ class MainViewModel(private val findIMoviesInteract: FindMoviesInteract) : ViewM
             if (!::_mainState.isInitialized) {
                 _mainState = MutableLiveData()
                 _mainState.value = ScreenState.Loading
-                findIMoviesInteract.getMovies(this)
+                mainInteract.getMovies(this)
             }
             return _mainState
         }
@@ -37,11 +37,11 @@ class MainViewModel(private val findIMoviesInteract: FindMoviesInteract) : ViewM
 }
 
 @Suppress("UNCHECKED_CAST")
-class MainViewModelFactory(private val findIMoviesInteract: FindMoviesInteract) :
+class MainViewModelFactory(private val mainInteract: MainInteract) :
     ViewModelProvider.NewInstanceFactory() {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return MainViewModel(findIMoviesInteract) as T
+        return MainViewModel(mainInteract) as T
     }
 
 }

@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.shopperpos.movie.R
 import com.shopperpos.movie.dialogs.MovieDialog
 import com.shopperpos.movie.dialogs.SetOnDetailListener
-import com.shopperpos.movie.movieDetail.MovieDetailActivity
+import com.shopperpos.movie.movie.MovieActivity
 import com.shopperpos.movie.service.data.movieGenre.Movie
 import com.shopperpos.movie.tools.ScreenState
 import kotlinx.android.synthetic.main.activity_main.*
@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity(), SetOnDetailListener {
 
         viewModel = ViewModelProviders.of(
             this,
-            MainViewModelFactory(FindMoviesInteract())
+            MainViewModelFactory(MainInteract())
         )[MainViewModel::class.java]
 
         viewModel.mainState.observe(::getLifecycle, ::updateUI)
@@ -75,7 +75,7 @@ class MainActivity : AppCompatActivity(), SetOnDetailListener {
 
     override fun onClickDetailMovie(movie: Movie) {
         mDialogFragment.dismiss()
-        val intent = Intent(this@MainActivity, MovieDetailActivity::class.java)
+        val intent = Intent(this@MainActivity, MovieActivity::class.java)
         intent.putExtra("movie", movie)
         startActivity(intent)
     }
