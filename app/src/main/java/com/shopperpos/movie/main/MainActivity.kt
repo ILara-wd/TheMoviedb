@@ -79,5 +79,4 @@ class MainActivity : AppCompatActivity(), SetOnDetailListener {
         intent.putExtra("movie", movie)
         startActivity(intent)
     }
-
 }
